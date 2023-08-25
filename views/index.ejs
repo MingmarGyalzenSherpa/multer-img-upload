@@ -12,6 +12,19 @@
 
       .img-container {
         background-color: blue;
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .img-wrapper {
+        width: 200px;
+        height: 200px;
+      }
+
+      .img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
     </style>
   </head>
@@ -22,7 +35,10 @@
     </form>
     <div class="img-container">
       <% images.forEach((img)=>{ %>
-      <img src="<%=img.path %>" alt="" />
+      <div class="img-wrapper">
+        <img src="<%=img.path %>" alt="" />
+      </div>
+
       <% })%>
     </div>
   </body>
