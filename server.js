@@ -16,9 +16,14 @@ const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "./public/images/");
   },
-  filename: (req, file, cb) => {
+  filename: async (req, file, cb) => {
     console.log(file);
-    cb(null, Date.now() + path.extname(file.originalname));
+    const imageName = file.originalname;
+    const fileName = Date.now() + path.extname(file.originalname);
+    console.log(fileName);
+    const pathName = "http://localhost:8000/static/images/" + fileName;
+    await Image.create({ imageName: imageName, path: pathName });
+    cb(null, fileName);
   },
 });
 
@@ -28,15 +33,16 @@ app.use("/static", express.static(__dirname + "/public"));
 
 app.set("view_engine", "ejs");
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
   //   res.sendFile(path.join(__dirname, "index.html"));
+  const images = await Image.find();
 
-  res.render("./index.ejs");
+  res.render("./index.ejs", { images: images });
 });
 
 app.post("/post-file", upload.single("myFile"), (req, res) => {
   console.log("Uploaded file name is : ", req.body);
-  console.log(req.file);
+  res.redirect("/");
 });
 
 app.get("/img", (req, res) => {

@@ -20,6 +20,10 @@
       <input type="file" name="myFile" />
       <button>Submit</button>
     </form>
-    <div class="img-container"></div>
+    <div class="img-container">
+      <% images.forEach((img)=>{ %>
+      <img src="<%=img.path %>" alt="" />
+      <% })%>
+    </div>
   </body>
 </html>
