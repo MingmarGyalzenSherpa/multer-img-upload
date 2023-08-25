@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <title>File Upload</title>
+    <style>
+      form {
+        background-color: red;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .img-container {
+        background-color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="/post-file" method="post" enctype="multipart/form-data">
+      <input type="file" name="myFile" />
+      <button>Submit</button>
+    </form>
+    <div class="img-container"></div>
+  </body>
+</html>
